@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-env
-WORKDIR /alamocorp
+WORKDIR /AlamoCorp.Website
 
 # Copy csproj and restore as distinct layers
 COPY *.csproj ./
@@ -11,6 +11,6 @@ RUN dotnet publish -c Release -o out
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
-WORKDIR /alamocorp
-COPY --from=build-env /alamocorp/out .
-ENTRYPOINT ["dotnet", "alamocorp.dll"]
+WORKDIR /AlamoCorp.Website
+COPY --from=build-env /AlamoCorp.Website/out .
+ENTRYPOINT ["dotnet", "AlamoCorp.Website.dll"]
